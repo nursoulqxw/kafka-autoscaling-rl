@@ -6,7 +6,7 @@ fontsize: 10pt
 margin:
   x: 1.8cm
   y: 1.6cm
-author: "Aliyev Nurislam, Student ID: ________, 26 October 2026"
+author: "Aliyev Nurislam, Student ID: 24B030024, 26 October 2026"
 ---
 
 # 1. Problem and RL suitability
@@ -139,7 +139,7 @@ With rps_level (288 states) the return is −897.4 ± 264.2 (median of seed mean
 
 **Tool:** Claude Code (Anthropic, model Claude Opus 5.5).
 **Used for:** generating the first version of the simulator, the agents, the experiment script and the figures from my detailed specification; proposing the one-time config tuning (checked only on baselines); drafting the README and this report from the CSV results; drafting the optional demo code.
-**What I verified or changed myself:** ________________________________________________
+**What I verified myself:** I ran the live Kafka demo myself (API, load generator and agent) and checked in the agent log that the trained policy added a consumer when the incoming RPS grew and that a real Kafka rebalance followed.
 
 # 8. References
 

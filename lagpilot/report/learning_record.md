@@ -1,6 +1,6 @@
 # Learning Record — CSCI3235 Midterm I
 
-**Student:** Aliyev Nurislam  **Student ID:** ________
+**Student:** Aliyev Nurislam  **Student ID:** 24B030024
 
 > Template. Fill in every section yourself. List only work you really did.
 
