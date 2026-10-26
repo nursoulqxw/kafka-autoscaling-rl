@@ -34,7 +34,7 @@ processes them.
 
 - **Traffic changes during the day.** It is quiet at night (about 20 orders per
   second), busy at midday (about 120 orders per second), and sometimes there is a
-  **flash sale**: traffic suddenly doubles for 1–3 minutes.
+  **flash sale**: traffic suddenly doubles for about 1–2.5 minutes.
 - **Too few workers:** orders pile up in the queue. This pile is called
   **lag**. If an order waits more than **30 seconds**, we break our promise to
   the customer (the **SLA**).

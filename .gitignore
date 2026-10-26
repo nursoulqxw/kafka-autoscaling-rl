@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Temporary files from building the report PDF
+_tmp.typ
+
+# Note: lagpilot/results/ is NOT ignored on purpose.
+# The figures and CSVs are part of the submission and the report cites them.
