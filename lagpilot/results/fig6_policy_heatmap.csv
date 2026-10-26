@@ -1,0 +1,13 @@
+delay_level,rps_level,action,visited
+0,0,scale_down,True
+0,1,scale_up,True
+0,2,keep,True
+1,0,keep,False
+1,1,keep,False
+1,2,keep,True
+2,0,keep,False
+2,1,scale_up,True
+2,2,keep,True
+3,0,keep,True
+3,1,scale_down,True
+3,2,keep,True

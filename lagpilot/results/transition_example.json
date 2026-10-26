@@ -1,0 +1,38 @@
+{
+  "eval_seed": 1000,
+  "step": 0,
+  "state_id": 26,
+  "state": {
+    "delay_level": "low",
+    "lag_trend": "stable",
+    "rps_level": "low",
+    "consumers": 2,
+    "rebalancing": false
+  },
+  "action": "scale_down",
+  "reward": -4.196,
+  "next_state_id": 51,
+  "next_state": {
+    "delay_level": "low",
+    "lag_trend": "rising",
+    "rps_level": "low",
+    "consumers": 2,
+    "rebalancing": true
+  },
+  "info": {
+    "rps": 20.0,
+    "arrivals": 196,
+    "processed": 0,
+    "lag": 196,
+    "delay_s": 1.96,
+    "consumers": 2,
+    "rebalancing": true,
+    "rebalance_started": true,
+    "sla_violated": false
+  },
+  "q_values_in_state": {
+    "keep": -81.71,
+    "scale_up": -79.37,
+    "scale_down": -76.63
+  }
+}
