@@ -17,7 +17,7 @@ results come from the simulator.**
 (recorded on 26 October 2026, before the "(invalid here, acts as keep)" note
 was added to the log line).
 
-## Run (4 terminals, from the project root)
+## Run (4 terminals, from the `lagpilot/` folder)
 
 ```bash
 pip install -r demo/requirements.txt

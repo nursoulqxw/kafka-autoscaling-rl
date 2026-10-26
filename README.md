@@ -116,7 +116,7 @@ The whole flow of the experiment:
 **Requirements:** Python 3.12 (tested 3.12.15 on macOS), about 2 minutes of CPU.
 
 ```bash
-# 1. go to the project folder
+# 1. go to the project folder (inside the repository)
 cd lagpilot
 
 # 2. create and activate a virtual environment
@@ -172,7 +172,7 @@ rewards over one day; **higher (closer to 0) is better**.
 | Static max (always 4) | −961.5 ± 8.7 | **0.8** | **0.0** | 3.97 | 2.0 |
 | Random | −2126.7 ± 129.2 | 332.9 | 78.3 | 2.51 | 40.7 |
 
-![Final comparison](results/fig2_final_comparison.png)
+![Final comparison](lagpilot/results/fig2_final_comparison.png)
 
 **What this means:**
 
@@ -186,7 +186,7 @@ rewards over one day; **higher (closer to 0) is better**.
 
 ### 4.2 Learning curve
 
-![Training curve](results/fig1_training_curve.png)
+![Training curve](lagpilot/results/fig1_training_curve.png)
 
 The agent improves from about −1698 to about −800 by episode 2000 and then
 stays above both baselines on average. After exploration ends (ε = 0.05 at
@@ -201,7 +201,7 @@ policy and the mean drops at some checkpoints.
 | 20 s | **−897.4** | −1002.6 | −961.5 | 10.5 | 26.6 | 9 / 9 |
 | 30 s | −1092.7 | −1239.7 | **−957.3** | 10.8 | 23.1 | 8 / 4 |
 
-![Rebalance study](results/fig3_rebalance_study.png)
+![Rebalance study](lagpilot/results/fig3_rebalance_study.png)
 
 - KEDA gets much worse when rebalances are slower, because it keeps flapping.
 - Q-learning beats KEDA at every R.
@@ -217,7 +217,7 @@ policy and the mean drops at some checkpoints.
 | with traffic level (288 states) | −897.4 ± 264.2 | **−829.7** | **14.7** | 10.5 |
 | without traffic level (96 states) | −953.5 ± 241.8 | −876.1 | 18.8 | 5.8 |
 
-![RPS feature](results/fig5_rps_feature.png)
+![RPS feature](lagpilot/results/fig5_rps_feature.png)
 
 Without the traffic level the agent only sees the *result* of traffic (delay),
 not its *cause*, so it reacts later and breaks the SLA more often. With it, the
@@ -225,7 +225,7 @@ agent can add a consumer **before** the delay becomes critical.
 
 ### 4.5 One day in detail
 
-![Episode trace](results/fig4_episode_trace.png)
+![Episode trace](lagpilot/results/fig4_episode_trace.png)
 
 Top: incoming traffic. Middle: delay with the 30 s SLA line. Bottom: number of
 consumers (shaded = rebalance in progress). KEDA (orange) keeps removing and
@@ -235,7 +235,7 @@ rebalances and broke the SLA in 13 steps.
 
 ### 4.6 What the agent learned
 
-![Policy heatmap](results/fig6_policy_heatmap.png)
+![Policy heatmap](lagpilot/results/fig6_policy_heatmap.png)
 
 The greedy action for 2 consumers, stable lag, no rebalance. Some cells look
 wrong (for example *scale_down* when delay is critical). These states are rarely
@@ -247,24 +247,25 @@ weakness of tabular Q-learning.
 ## 5. Project structure
 
 ```
-lagpilot/
-├── lagpilot/                 # the RL code (NumPy only, no Gym)
-│   ├── config.py             # all constants in one place (frozen)
-│   ├── env.py                # KafkaLagEnv: the simulator (reset, step, encode, decode)
-│   ├── agents.py             # QLearningAgent, KedaRulePolicy, StaticMaxPolicy, RandomPolicy
-│   ├── train.py              # run_episode, evaluate, train_seed (+ baseline sanity check)
-│   └── experiments.py        # runs all experiments, saves figures and CSVs
-├── results/                  # generated: fig1..fig6 (.png), CSVs, q_table.npy, transition_example.json
-├── report/
-│   ├── report.md / .pdf      # the 6-page report
-│   └── learning_record.md    # learning record
-├── demo/                     # optional live Kafka demo (see demo/README.md)
+.                             # repository root
 ├── README.md                 # this file
 ├── THEORY.md                 # all background theory from zero
-└── requirements.txt          # numpy, pandas, matplotlib (pinned)
+└── lagpilot/                 # the project (run all commands from here)
+    ├── lagpilot/             # the RL code (NumPy only, no Gym)
+    │   ├── config.py             # all constants in one place (frozen)
+    │   ├── env.py                # KafkaLagEnv: the simulator (reset, step, encode, decode)
+    │   ├── agents.py             # QLearningAgent, KedaRulePolicy, StaticMaxPolicy, RandomPolicy
+    │   ├── train.py              # run_episode, evaluate, train_seed (+ baseline sanity check)
+    │   └── experiments.py        # runs all experiments, saves figures and CSVs
+    ├── results/                  # generated: fig1..fig6 (.png), CSVs, q_table.npy, transition_example.json
+    ├── report/
+    │   ├── report.md / .pdf      # the 6-page report
+    │   └── learning_record.md    # learning record
+    ├── demo/                     # optional live Kafka demo (see demo/README.md)
+    └── requirements.txt          # numpy, pandas, matplotlib (pinned)
 ```
 
-**Where to look in the code:**
+**Where to look in the code** (paths are inside the `lagpilot/` folder):
 
 | I want to see… | Open |
 |---|---|
@@ -274,7 +275,7 @@ lagpilot/
 | the KEDA rule | `lagpilot/agents.py` → `KedaRulePolicy.act` |
 | the training loop and ε decay | `lagpilot/train.py` → `train_seed` |
 
-**Generated result files:**
+**Generated result files** (in `lagpilot/results/`):
 
 | File | Content |
 |---|---|
@@ -338,7 +339,7 @@ to help Q-learning.
 FastAPI endpoint receives orders, a load generator sends 20 → 120 → 300 RPS,
 real consumer threads process them, and every 10 s the agent reads the real lag
 and adds or removes a consumer (a real rebalance). See
-[demo/README.md](demo/README.md) for the 4 commands.
+[lagpilot/demo/README.md](lagpilot/demo/README.md) for the 4 commands.
 
 > **The demo only shows the trained policy running on real Kafka. All results
 > above come from the simulator.**
@@ -366,4 +367,4 @@ and adds or removes a consumer (a real rebalance). See
 - **Simulator gap:** real consumers have variable speed, rebalances have random
   length, and traffic is not a clean curve.
 
-More details and next steps are in the report: [report/report.pdf](report/report.pdf).
+More details and next steps are in the report: [lagpilot/report/report.pdf](lagpilot/report/report.pdf).

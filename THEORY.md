@@ -5,6 +5,8 @@ to know Kafka or reinforcement learning before reading it. Each part ends with
 "**In LagPilot:**", which shows where the idea appears in the code.
 
 For how to run the project and the results, see [README.md](README.md).
+File paths in this document (like `lagpilot/env.py` or `results/...`) are
+relative to the `lagpilot/` project folder.
 
 ---
 
